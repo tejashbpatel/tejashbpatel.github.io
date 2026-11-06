@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-itunes-app" content="app-id=6818281618">
+<title>Join my Shrug</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Inter", "Segoe UI", sans-serif;
+    color: #fff; text-align: center;
+    background: linear-gradient(160deg, #0045f2 0%, #7326d9 38%, #fa3399 72%, #ff8c40 100%);
+  }
+  main { width: 100%; max-width: 420px; }
+  .emoji { font-size: 84px; line-height: 1; filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); }
+  h1 { margin-top: 12px; font-size: 34px; font-weight: 800; text-shadow: 0 3px 10px rgba(0,0,0,.25); }
+  p.lead { margin-top: 8px; font-size: 17px; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,.3); }
+  .code-box {
+    margin: 26px auto 8px; padding: 14px 20px; border-radius: 18px;
+    background: rgba(0,0,0,.28); border: 1.5px solid rgba(255,255,255,.55);
+  }
+  .code-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; }
+  .code { margin-top: 4px; font-size: 40px; font-weight: 800; letter-spacing: 6px;
+          font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .btn {
+    display: block; width: 100%; margin-top: 14px; padding: 17px 20px; border-radius: 18px;
+    font-size: 18px; font-weight: 700; text-decoration: none; border: 0; cursor: pointer;
+  }
+  .primary { background: #fff; color: #7326d9; box-shadow: 0 8px 22px rgba(0,0,0,.28); }
+  .secondary { background: rgba(0,0,0,.25); color: #fff; border: 1.5px solid rgba(255,255,255,.55); }
+  .help { margin-top: 18px; font-size: 14px; font-weight: 500; line-height: 1.45; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+  footer { margin-top: 34px; font-size: 12px; opacity: .92; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div class="emoji" aria-hidden="true">🤷</div>
+  <h1>You're invited to a Shrug!</h1>
+  <p class="lead">Friends decide together. Shrug settles the rest.</p>
+
+  <div class="code-box" id="codeBox" hidden>
+    <div class="code-label">YOUR JOIN CODE</div>
+    <div class="code" id="code"></div>
+  </div>
+
+  <a class="btn primary" href="https://apps.apple.com/app/shrug-group-decider/id6818281618">Get Shrug on the App Store</a>
+  <button class="btn secondary" id="copy" hidden>Copy code</button>
+
+  <p class="help">Already have Shrug? Open the app and type the code above, or tap this link again from your phone's messages.</p>
+
+  <footer>&copy; 2026 Shrika LLC</footer>
+</main>
+<script>
+  (function () {
+    var raw = new URLSearchParams(location.search).get("code") || "";
+    var code = raw.trim().toUpperCase();
+    // Shrug codes are 6 characters, never 0, O, 1 or I.
+    if (!/^[A-HJ-NP-Z2-9]{6}$/.test(code)) return;
+    document.getElementById("code").textContent = code;
+    document.getElementById("codeBox").hidden = false;
+    var copy = document.getElementById("copy");
+    copy.hidden = false;
+    copy.addEventListener("click", function () {
+      function done() { copy.textContent = "Copied!"; setTimeout(function () { copy.textContent = "Copy code"; }, 2000); }
+      if (navigator.clipboard) { navigator.clipboard.writeText(code).then(done); }
+    });
+  })();
+</script>
+</body>
+</html>
