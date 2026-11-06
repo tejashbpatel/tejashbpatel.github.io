@@ -70,6 +70,7 @@
       function done() { copy.textContent = "Copied!"; setTimeout(function () { copy.textContent = "Copy code"; }, 2000); }
       if (navigator.clipboard) { navigator.clipboard.writeText(code).then(done); }
     });
+
   })();
 </script>
 </body>
